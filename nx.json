@@ -1,0 +1,33 @@
+{
+	"implicitDependencies": {
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		".eslintrc.json": "*"
+	},
+	"affected": {
+		"defaultBase": "master"
+	},
+	"npmScope": "bp",
+	"tasksRunnerOptions": {
+		"default": {
+			"runner": "@nrwl/workspace/tasks-runners/default",
+			"options": {
+				"cacheableOperations": ["build", "lint", "test", "e2e"]
+			}
+		}
+	},
+	"projects": {
+		"line-chart": {
+			"tags": []
+		},
+		"line-chart-e2e": {
+			"tags": [],
+			"implicitDependencies": ["line-chart"]
+		},
+		"shared-models": {
+			"tags": []
+		}
+	}
+}

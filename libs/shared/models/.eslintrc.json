@@ -1,0 +1,12 @@
+{
+	"extends": ["../../../.eslintrc.json"],
+	"ignorePatterns": ["!**/*"],
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"extends": ["plugin:@nrwl/nx/angular"],
+			"parserOptions": { "project": ["libs/shared/models/tsconfig.*?.json"] },
+			"rules": {}
+		}
+	]
+}
