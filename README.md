@@ -1,6 +1,6 @@
 # Welcome, a fellow developer, I'm glad you are here!
  
-We need to build a very simple time-based line chart, nothing fancy really, without resorting to any chart lib using a prepared firebase collection.
+We need to build a very simple time-based line chart, nothing fancy really, *without resorting to any charting lib* using a prepared firebase collection.
 * We should be able to switch between 4 cryptocurrencies defined on the constant `CRYPTO_CURRENCIES_PRICES_COLLECTION_NAME`.
 * When a currency is selected, we draw a line chart where the X-axis is time, and the Y-axis is the tick's price.
 * By default, BTC is selected.
