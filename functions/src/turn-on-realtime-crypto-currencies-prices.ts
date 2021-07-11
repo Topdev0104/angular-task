@@ -1,12 +1,11 @@
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
 import { interval, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import type { CryptoCurrencyCode } from '../../libs/shared/models/src';
 import { CRYPTO_CURRENCIES_PRICES_COLLECTION_NAME, TURN_ON_REALTIME_CRYPTO_CURRENCY_PRICES_FB_FN, CRYPTO_CURRENCY_CODES_AND_NAMES } from '../../libs/shared/models/src';
 
-const firestore = admin.initializeApp().firestore();
+import { firestore } from './firestore';
 
 let timerSubscription = Subscription.EMPTY;
 let activeCryptoCurrencyCode: CryptoCurrencyCode | null = null;
@@ -41,21 +40,27 @@ exports[TURN_ON_REALTIME_CRYPTO_CURRENCY_PRICES_FB_FN] = functions.https
 function setGeneratedCryptoPrice({ cryptoCurrencyCode, price }: CryptoCurrencyState): void {
 	void cryptoCurrenciesPricesCollection
 		.doc(`${ cryptoCurrencyCode }/prices/${ Date.now() }`)
-		.set({ price });
+		.set({
+			timestamp: Date.now(),
+			price,
+		 });
 }
 
 async function getInitialCryptoCurrencyState(cryptoCurrencyCode: CryptoCurrencyCode): Promise<CryptoCurrencyState> {
 	const pricesDocuments = await cryptoCurrenciesPricesCollection
 		.doc(cryptoCurrencyCode)
 		.collection('prices')
-		.listDocuments();
+		.orderBy('timestamp')
+		.limitToLast(1)
+		.get();
 
-	const lastPriceDocument = await pricesDocuments.pop()?.get();
+	const [ lastPriceDocument ] = pricesDocuments.docs;
 
 	return {
 		cryptoCurrencyCode,
 		priceVector: 1,
-		price: lastPriceDocument?.data()?.price ?? 100,
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		price: lastPriceDocument?.data().price ?? 100,
 	};
 }
 
