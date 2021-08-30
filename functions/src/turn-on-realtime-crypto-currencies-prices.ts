@@ -29,10 +29,12 @@ exports[TURN_ON_REALTIME_CRYPTO_CURRENCY_PRICES_FB_FN] = functions.https
 		const cryptoCurrencyState = await getInitialCryptoCurrencyState(cryptoCurrencyCode);
 
 		timerSubscription.unsubscribe();
+
 		timerSubscription = interval(2000)
 			.pipe(takeUntil(timer(1000 * 60 * 15)))
 			.subscribe(() => {
 				generatePriceForGivenCryptoState(cryptoCurrencyState);
+
 				setGeneratedCryptoPrice(cryptoCurrencyState);
 			});
 	});
@@ -68,6 +70,7 @@ function generatePriceForGivenCryptoState(state: CryptoCurrencyState): void {
 	state.priceVector = new Date().getSeconds() % 15 === 0
 		? state.priceVector * -1
 		: state.priceVector;
+
 	state.price += Math.round(Math.random() * 15) * new Date().getSeconds() * state.priceVector;
 
 	if (state.price < 200)

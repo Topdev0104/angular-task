@@ -1,4 +1,5 @@
 {
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
 	"cli": {
 		"defaultCollection": "@nrwl/angular",
@@ -23,13 +24,13 @@
 		"@nrwl/angular:application": {
 			"style": "scss",
 			"linter": "eslint",
-			"unitTestRunner": "jest",
-			"e2eTestRunner": "cypress"
+			"unitTestRunner": "none",
+			"e2eTestRunner": "none"
 		},
 		"@nrwl/angular:library": {
 			"style": "scss",
 			"linter": "eslint",
-			"unitTestRunner": "jest"
+			"unitTestRunner": "none"
 		},
 		"@nrwl/angular:component": {
 			"style": "scss"
@@ -107,43 +108,10 @@
 					"options": {
 						"lintFilePatterns": ["apps/line-chart/src/**/*.ts", "apps/line-chart/src/**/*.html"]
 					}
-				},
-				"test": {
-					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/apps/line-chart"],
-					"options": {
-						"jestConfig": "apps/line-chart/jest.config.js",
-						"passWithNoTests": true
-					}
 				}
 			}
 		},
-		"line-chart-e2e": {
-			"root": "apps/line-chart-e2e",
-			"sourceRoot": "apps/line-chart-e2e/src",
-			"projectType": "application",
-			"architect": {
-				"e2e": {
-					"builder": "@nrwl/cypress:cypress",
-					"options": {
-						"cypressConfig": "apps/line-chart-e2e/cypress.json",
-						"tsConfig": "apps/line-chart-e2e/tsconfig.e2e.json",
-						"devServerTarget": "line-chart:serve"
-					},
-					"configurations": {
-						"production": {
-							"devServerTarget": "line-chart:serve:production"
-						}
-					}
-				},
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"options": {
-						"lintFilePatterns": ["apps/line-chart-e2e/**/*.{js,ts}"]
-					}
-				}
-			}
-		},
+
 		"shared-models": {
 			"projectType": "library",
 			"root": "libs/shared/models",
