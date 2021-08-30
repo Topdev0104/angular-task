@@ -10,6 +10,7 @@ We need to build a very simple time-based line chart, nothing fancy real
 -   So the moment one subscribes to the collection the one will either get N records instantly or an empty array, to start getting prices we must turn on real-time mode for a given cryptocurrency; there is an example on `firebase.service.ts` of how and what model is returned `onSnapshot` change. The real-time mode gets turned off in 15 mins.
 -   Best practices are welcome, e.g. SOLID, etc. It should be designed to be maintainable to an extent.
 -   Tests are not necessary.
+-   Please use repositories formatting.
 
 # Crypto Currencies Prices Line Chart
 
