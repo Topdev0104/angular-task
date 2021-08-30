@@ -62,7 +62,7 @@ async function getInitialCryptoCurrencyState(cryptoCurrencyCode: CryptoCurrencyC
 		cryptoCurrencyCode,
 		priceVector: 1,
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-		price: lastPriceDocument?.data().price ?? 100,
+		price: <number | undefined>lastPriceDocument?.data().price ?? 100,
 	};
 }
 
