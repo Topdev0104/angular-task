@@ -22,10 +22,6 @@
 		"line-chart": {
 			"tags": []
 		},
-		"line-chart-e2e": {
-			"tags": [],
-			"implicitDependencies": ["line-chart"]
-		},
 		"shared-models": {
 			"tags": []
 		}

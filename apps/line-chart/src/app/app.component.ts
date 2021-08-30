@@ -11,7 +11,5 @@ import { FirebaseService } from '../services';
 export class AppComponent {
 	title = 'line-chart';
 
-	constructor(public firebase: FirebaseService) {
-
-	}
+	constructor(public firebase: FirebaseService) {}
 }

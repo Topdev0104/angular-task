@@ -2,13 +2,12 @@
 	"$schema": "http://json.schemastore.org/prettierrc",
 	"singleQuote": true,
 	"printWidth": 120,
-	"useTabs": true,
-	"tabWidth": 4,
 	"trailingComma": "es5",
 	"bracketSpacing": true,
 	"htmlWhitespaceSensitivity": "css",
 	"semi": true,
 	"arrowParens": "avoid",
 	"proseWrap": "preserve",
-	"quoteProps": "as-needed"
+	"quoteProps": "as-needed",
+	"editorconfig": true
 }

@@ -111,7 +111,6 @@
 				}
 			}
 		},
-
 		"shared-models": {
 			"projectType": "library",
 			"root": "libs/shared/models",
