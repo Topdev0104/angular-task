@@ -2,8 +2,6 @@
 
 We need to build a very simple time-based line chart, nothing fancy really, **without resorting to any charting lib** using a prepared firebase collection.
 
-
-
 -   NO charting lib, I believe angular provides with enough tools to build a simple line chart.
 -   We should be able to switch between 4 cryptocurrencies defined on the constant `CRYPTO_CURRENCIES_PRICES_COLLECTION_NAME`.
 -   When a currency is selected, we draw a line chart where the X-axis is time, and the Y-axis is the tick's price.
@@ -15,13 +13,7 @@ We need to build a very simple time-based line chart, nothing fancy real
 -   Tests are not necessary.
 -   Please use repositories formatting.
 -   Eslint rules there for a reason. On the company we use them. Disabling must be convincingly justified.
-
-
-
-
-
-
-
+----
 
 # Crypto Currencies Prices Line Chart
 
