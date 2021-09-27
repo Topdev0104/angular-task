@@ -2,7 +2,8 @@
 
 We need to build a very simple time-based line chart, nothing fancy really, **without resorting to any charting lib** using a prepared firebase collection.
 
--   NO charting lib, I believe angular provides with enough tools to build a simple line chart.
+-   NO charting lib, I believe angular provides enough tools to build a simple line chart, also it will be a nice showcase
+    of one's architectural skills.
 -   We should be able to switch between 4 cryptocurrencies defined on the constant `CRYPTO_CURRENCIES_PRICES_COLLECTION_NAME`.
 -   When a currency is selected, we draw a line chart where the X-axis is time, and the Y-axis is the tick's price. No need for labels, just a line.
 -   By default, BTC is selected.
