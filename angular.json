@@ -8,7 +8,7 @@
 			"versionMismatch": false
 		}
 	},
-	"defaultProject": "line-chart",
+	"defaultProject": "task",
 	"schematics": {
 		"@nrwl/angular": {
 			"application": {
@@ -37,31 +37,31 @@
 		}
 	},
 	"projects": {
-		"line-chart": {
+		"task": {
 			"projectType": "application",
-			"root": "apps/line-chart",
-			"sourceRoot": "apps/line-chart/src",
+			"root": "apps/task",
+			"sourceRoot": "apps/task/src",
 			"prefix": "bp",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/apps/line-chart",
-						"index": "apps/line-chart/src/index.html",
-						"main": "apps/line-chart/src/main.ts",
-						"polyfills": "apps/line-chart/src/polyfills.ts",
-						"tsConfig": "apps/line-chart/tsconfig.app.json",
+						"outputPath": "dist/apps/task",
+						"index": "apps/task/src/index.html",
+						"main": "apps/task/src/main.ts",
+						"polyfills": "apps/task/src/polyfills.ts",
+						"tsConfig": "apps/task/tsconfig.app.json",
 						"aot": true,
-						"assets": ["apps/line-chart/src/favicon.ico", "apps/line-chart/src/assets"],
-						"styles": ["apps/line-chart/src/styles.scss"],
+						"assets": ["apps/task/src/favicon.ico", "apps/task/src/assets"],
+						"styles": ["apps/task/src/styles.scss"],
 						"scripts": []
 					},
 					"configurations": {
 						"production": {
 							"fileReplacements": [
 								{
-									"replace": "apps/line-chart/src/environments/environment.ts",
-									"with": "apps/line-chart/src/environments/environment.production.ts"
+									"replace": "apps/task/src/environments/environment.ts",
+									"with": "apps/task/src/environments/environment.production.ts"
 								}
 							],
 							"optimization": true,
@@ -89,50 +89,123 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "line-chart:build"
+						"browserTarget": "task:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "line-chart:build:production"
+							"browserTarget": "task:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "line-chart:build"
+						"browserTarget": "task:build"
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["apps/line-chart/src/**/*.ts", "apps/line-chart/src/**/*.html"]
+						"lintFilePatterns": ["apps/task/src/**/*.ts", "apps/task/src/**/*.html"]
 					}
 				}
 			}
 		},
-		"shared-models": {
+		"line-chart-models": {
 			"projectType": "library",
-			"root": "libs/shared/models",
-			"sourceRoot": "libs/shared/models/src",
+			"root": "libs/line-chart/models",
+			"sourceRoot": "libs/line-chart/models/src",
 			"prefix": "bp",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/line-chart/models"],
 					"options": {
-						"tsConfig": "libs/shared/models/tsconfig.lib.json",
-						"project": "libs/shared/models/ng-package.json"
+						"project": "libs/line-chart/models/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "libs/shared/models/tsconfig.lib.prod.json"
+							"tsConfig": "libs/line-chart/models/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/line-chart/models/tsconfig.lib.json"
 						}
-					}
+					},
+					"defaultConfiguration": "production"
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/shared/models/src/**/*.ts", "libs/shared/models/src/**/*.html"]
+						"lintFilePatterns": [
+							"libs/line-chart/models/src/**/*.ts",
+							"libs/line-chart/models/src/**/*.html"
+						]
+					}
+				}
+			}
+		},
+		"line-chart-services": {
+			"projectType": "library",
+			"root": "libs/line-chart/services",
+			"sourceRoot": "libs/line-chart/services/src",
+			"prefix": "bp",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/line-chart/services"],
+					"options": {
+						"project": "libs/line-chart/services/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/line-chart/services/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/line-chart/services/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"libs/line-chart/services/src/**/*.ts",
+							"libs/line-chart/services/src/**/*.html"
+						]
+					}
+				}
+			}
+		},
+		"weather-forecast-services": {
+			"projectType": "library",
+			"root": "libs/weather-forecast/services",
+			"sourceRoot": "libs/weather-forecast/services/src",
+			"prefix": "bp",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/weather-forecast/services"],
+					"options": {
+						"project": "libs/weather-forecast/services/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/weather-forecast/services/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/weather-forecast/services/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"libs/weather-forecast/services/src/**/*.ts",
+							"libs/weather-forecast/services/src/**/*.html"
+						]
 					}
 				}
 			}

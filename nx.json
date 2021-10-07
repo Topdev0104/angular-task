@@ -19,10 +19,16 @@
 		}
 	},
 	"projects": {
-		"line-chart": {
+		"line-chart-models": {
 			"tags": []
 		},
-		"shared-models": {
+		"line-chart-services": {
+			"tags": []
+		},
+		"task": {
+			"tags": []
+		},
+		"weather-forecast-services": {
 			"tags": []
 		}
 	}

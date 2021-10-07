@@ -22,22 +22,6 @@
 			"files": ["*.ts"],
 			"extends": ["prettier"],
 			"rules": {
-				"@angular-eslint/component-selector": [
-					"error",
-					{
-						"type": ["element", "attribute"],
-						"prefix": "bp",
-						"style": "kebab-case"
-					}
-				],
-				"@angular-eslint/directive-selector": [
-					"error",
-					{
-						"type": ["element", "attribute"],
-						"prefix": "bp",
-						"style": "camelCase"
-					}
-				],
 				"@typescript-eslint/member-ordering": [
 					"error",
 					{
