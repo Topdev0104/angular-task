@@ -15,7 +15,7 @@ https://openweathermap.org/api/geocoding-api
 -   When no city is found, we should reflect it.
 -   The city table has a column`City Name`, and the rest are temperature columns. In the case of hourly mode, 8 columns with 3-hour step and in the case of daily mode 7 days.
 -   Switching between hourly and daily modes should bring back the previous state of the table before switching.
--   The URL should be updated according to the search and mode.
+-   The URL should be updated according to the search query and mode. That is two parameters on the URL.
 -   Build the application using NgRx.
 -   SOLID, DRY, shouldn't be just abbreviations for you. It should be designed to be maintainable to an extent.
 -   Tests are not necessary.
