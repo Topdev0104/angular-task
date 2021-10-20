@@ -19,12 +19,6 @@
 		}
 	},
 	"projects": {
-		"line-chart-models": {
-			"tags": []
-		},
-		"line-chart-services": {
-			"tags": []
-		},
 		"task": {
 			"tags": []
 		},
