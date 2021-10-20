@@ -14,10 +14,12 @@ https://openweathermap.org/api/geocoding-api
 -   When a new city is searched, we need first to get its coordinates using `http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit=1&appid={API key}` and then for the hourly mode make a call to `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,daily,alerts&appid={API key}`, and for the daily mode `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,hourly,alerts&appid={API key}` and add it to a city table.
 -   When no city is found, we should reflect it.
 -   The city table has a column`City Name`, and the rest are temperature columns. In the case of hourly mode, 8 columns with 3-hour step and in the case of daily mode 7 days.
--   Switching between hourly and daily modes should bring back the previous state before switching.
+-   Switching between hourly and daily modes should bring back the previous state of the table before switching.
 -   The URL should be updated according to the search and mode.
 -   Build the application using NgRx.
--   No tests are required.
+-   SOLID, DRY, shouldn't be just abbreviations for you. It should be designed to be maintainable to an extent.
+-   Tests are not necessary.
+-   Please use repositories formatting.
 
 # This project was generated using [Nx](https://nx.dev).
 
