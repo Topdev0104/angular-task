@@ -18,12 +18,39 @@
 			}
 		}
 	},
-	"projects": {
-		"task": {
-			"tags": []
-		},
-		"weather-forecast-services": {
-			"tags": []
+	"cli": {
+		"defaultCollection": "@nrwl/angular",
+		"warnings": {
+			"typescriptMismatch": false,
+			"versionMismatch": false
 		}
-	}
+	},
+	"generators": {
+		"@nrwl/angular": {
+			"application": {
+				"linter": "eslint"
+			},
+			"library": {
+				"linter": "eslint"
+			},
+			"storybook-configuration": {
+				"linter": "eslint"
+			}
+		},
+		"@nrwl/angular:application": {
+			"style": "scss",
+			"linter": "eslint",
+			"unitTestRunner": "none",
+			"e2eTestRunner": "none"
+		},
+		"@nrwl/angular:library": {
+			"style": "scss",
+			"linter": "eslint",
+			"unitTestRunner": "none"
+		},
+		"@nrwl/angular:component": {
+			"style": "scss"
+		}
+	},
+	"defaultProject": "weather-forecast"
 }

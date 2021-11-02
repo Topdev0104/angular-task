@@ -1,5 +1,8 @@
 {
 	"extends": ["../../.eslintrc.json"],
 	"ignorePatterns": ["!**/*"],
-	"overrides": []
+	"overrides": [
+		{ "files": ["*.ts"], "parserOptions": { "project": ["./tsconfig.*?.json"] }, "rules": {} },
+		{ "files": ["*.html"], "extends": ["plugin:@nrwl/nx/angular-template"], "rules": {} }
+	]
 }

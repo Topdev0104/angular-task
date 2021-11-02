@@ -20,7 +20,8 @@
 		},
 		{
 			"files": ["*.ts"],
-			"extends": ["prettier"],
+			"extends": ["plugin:@nrwl/nx/angular"],
+			"plugins": ["@typescript-eslint"],
 			"rules": {
 				"@typescript-eslint/member-ordering": [
 					"error",

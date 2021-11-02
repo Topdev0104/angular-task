@@ -1,14 +1,6 @@
 {
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
-	"cli": {
-		"defaultCollection": "@nrwl/angular",
-		"warnings": {
-			"typescriptMismatch": false,
-			"versionMismatch": false
-		}
-	},
-	"defaultProject": "task",
 	"schematics": {
 		"@nrwl/angular": {
 			"application": {
@@ -37,31 +29,31 @@
 		}
 	},
 	"projects": {
-		"task": {
+		"weather-forecast": {
 			"projectType": "application",
-			"root": "apps/task",
-			"sourceRoot": "apps/task/src",
+			"root": "apps/weather-forecast",
+			"sourceRoot": "apps/weather-forecast/src",
 			"prefix": "bp",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/apps/task",
-						"index": "apps/task/src/index.html",
-						"main": "apps/task/src/main.ts",
-						"polyfills": "apps/task/src/polyfills.ts",
-						"tsConfig": "apps/task/tsconfig.app.json",
+						"outputPath": "dist/apps/weather-forecast",
+						"index": "apps/weather-forecast/src/index.html",
+						"main": "apps/weather-forecast/src/main.ts",
+						"polyfills": "apps/weather-forecast/src/polyfills.ts",
+						"tsConfig": "apps/weather-forecast/tsconfig.app.json",
 						"aot": true,
-						"assets": ["apps/task/src/favicon.ico", "apps/task/src/assets"],
-						"styles": ["apps/task/src/styles.scss"],
+						"assets": ["apps/weather-forecast/src/favicon.ico", "apps/weather-forecast/src/assets"],
+						"styles": ["apps/weather-forecast/src/styles.scss"],
 						"scripts": []
 					},
 					"configurations": {
 						"production": {
 							"fileReplacements": [
 								{
-									"replace": "apps/task/src/environments/environment.ts",
-									"with": "apps/task/src/environments/environment.production.ts"
+									"replace": "apps/weather-forecast/src/environments/environment.ts",
+									"with": "apps/weather-forecast/src/environments/environment.production.ts"
 								}
 							],
 							"optimization": true,
@@ -89,27 +81,28 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "task:build"
+						"browserTarget": "weather-forecast:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "task:build:production"
+							"browserTarget": "weather-forecast:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "task:build"
+						"browserTarget": "weather-forecast:build"
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["apps/task/src/**/*.ts", "apps/task/src/**/*.html"]
+						"lintFilePatterns": ["apps/weather-forecast/src/**/*.ts", "apps/weather-forecast/src/**/*.html"]
 					}
 				}
-			}
+			},
+			"tags": []
 		},
 		"weather-forecast-services": {
 			"projectType": "library",
@@ -142,7 +135,8 @@
 						]
 					}
 				}
-			}
+			},
+			"tags": []
 		}
 	}
 }
