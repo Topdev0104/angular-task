@@ -72,3 +72,8 @@ export interface WeatherForecast {
 	hourly?: WeatherHourly[];
 	daily?: WeatherDaily[];
 }
+
+export interface WeatherOfCity {
+	coordinate: Coordinate;
+	weather: WeatherForecast;
+}

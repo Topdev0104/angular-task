@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { map, Observable, switchMap } from 'rxjs';
 
-import { Coordinate, ForecastMode, WeatherForecast } from './weather-forecast';
+import { Coordinate, ForecastMode, WeatherForecast, WeatherOfCity } from './weather-forecast';
 
 @Injectable()
 export class WeatherForecastApiService {
@@ -11,7 +11,7 @@ export class WeatherForecastApiService {
 	private url = 'https://api.openweathermap.org';
 
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
 	) {
 	}
 
@@ -22,8 +22,9 @@ export class WeatherForecastApiService {
 			.append('limit', 1)
 			.append('appid', this.apiKey);
 
+		// This will throw 404 error when city not found...
 		return this.http.get<Coordinate[]>(url, { params }).pipe(
-			map(res => res[0])
+			map(res => res[0] || new HttpErrorResponse({ status: 404, statusText: 'city not found.' })),
 		);
 	}
 
@@ -36,6 +37,16 @@ export class WeatherForecastApiService {
 			.append('appid', this.apiKey);
 
 		return this.http.get<WeatherForecast>(url, { params });
+	}
+
+	getWeatherForecastByCity(city: string, forecastMode: ForecastMode): Observable<WeatherOfCity> {
+		return this.getCoordinates(city).pipe(
+			switchMap(coordinate => this.getWeatherForecast(coordinate.lat, coordinate.lon, forecastMode)
+				.pipe(
+					map(weather => ({ weather, coordinate })),
+				),
+			),
+		);
 	}
 
 }
