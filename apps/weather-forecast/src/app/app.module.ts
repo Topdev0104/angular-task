@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +19,8 @@ import { WeatherOfCityEffects } from './state/weather-of-city.effects';
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
+		FormsModule,
+		ReactiveFormsModule,
 		StoreModule.forRoot(
 			{},
 			{

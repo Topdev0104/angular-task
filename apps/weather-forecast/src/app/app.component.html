@@ -1,1 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="search()">
+	<input formControlName="city">
+	<button>Search</button>
+</form>
+
 {{ weatherOfCities$ | async | json }}

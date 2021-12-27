@@ -9,12 +9,17 @@ import * as WeatherOfCityActions from './weather-of-city.actions';
 
 @Injectable()
 export class WeatherOfCityEffects {
-	init$ = createEffect(() =>
+
+	loadWeatherOfCity$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(WeatherOfCityActions.init),
+			ofType(WeatherOfCityActions.loadWeatherOfCity),
 			fetch({
-				run: action => this.weatherForecastApiService.getWeatherForecastByCity('New york', ForecastMode.Daily).pipe(
-					map(weatherOfCity => WeatherOfCityActions.loadWeatherOfCitySuccess({ weatherOfCity: { id: 1, ...weatherOfCity } })),
+				run: action => this.weatherForecastApiService.getWeatherForecastByCity(action.city, ForecastMode.Daily).pipe(
+					map(weatherOfCity =>
+						WeatherOfCityActions.loadWeatherOfCitySuccess(
+							{ weatherOfCity: { id: weatherOfCity.coordinate.name, ...weatherOfCity } }
+						)
+					),
 				),
 				onError: (action, error) => {
 					console.error('Error', error);
