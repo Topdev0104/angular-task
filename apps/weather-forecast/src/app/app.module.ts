@@ -6,9 +6,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { WeatherForecastServicesModule } from '@bp/weather-forecast/services';
+
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { WeatherForecastServicesModule } from '@bp/weather-forecast/services';
+
+import * as fromWeatherOfCity from './+state/weather-of-city.reducer';
+import { WeatherOfCityEffects } from './+state/weather-of-city.effects';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -27,7 +31,9 @@ import { WeatherForecastServicesModule } from '@bp/weather-forecast/services';
 		EffectsModule.forRoot([]),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		HttpClientModule,
-		WeatherForecastServicesModule.forRoot()
+		WeatherForecastServicesModule.forRoot(),
+		StoreModule.forFeature(fromWeatherOfCity.WEATHEROFCITY_FEATURE_KEY, fromWeatherOfCity.reducer),
+		EffectsModule.forFeature([WeatherOfCityEffects]),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
