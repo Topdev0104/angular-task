@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { loadWeatherOfCity } from './state/weather-of-city.actions';
 import { getAllWeatherOfCity } from './state/weather-of-city.selectors';
+import { ForecastMode } from '@bp/weather-forecast/services';
 
 @Component({
 	selector: 'bp-root',
@@ -12,10 +13,13 @@ import { getAllWeatherOfCity } from './state/weather-of-city.selectors';
 })
 export class AppComponent implements OnInit {
 
+	ForecastMode = ForecastMode;
+
 	weatherOfCities$ = this.store.select(getAllWeatherOfCity);
 
 	form = this.fb.group({
 		city: ['', Validators.required],
+		forecastMode: [ForecastMode.Daily, Validators.required]
 	});
 
 	constructor(

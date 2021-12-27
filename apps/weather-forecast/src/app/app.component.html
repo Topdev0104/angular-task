@@ -1,5 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="search()">
 	<input formControlName="city">
+	<select formControlName="forecastMode">
+		<option [value]="ForecastMode.Daily">Daily</option>
+		<option [value]="ForecastMode.Hourly">Hourly</option>
+	</select>
 	<button>Search</button>
 </form>
 

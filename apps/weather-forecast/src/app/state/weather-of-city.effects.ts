@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { map } from 'rxjs';
 
-import { ForecastMode, WeatherForecastApiService } from '@bp/weather-forecast/services';
+import { WeatherForecastApiService } from '@bp/weather-forecast/services';
 
 import * as WeatherOfCityActions from './weather-of-city.actions';
 
@@ -14,11 +14,11 @@ export class WeatherOfCityEffects {
 		this.actions$.pipe(
 			ofType(WeatherOfCityActions.loadWeatherOfCity),
 			fetch({
-				run: action => this.weatherForecastApiService.getWeatherForecastByCity(action.city, ForecastMode.Daily).pipe(
+				run: action => this.weatherForecastApiService.getWeatherForecastByCity(action.city, action.forecastMode).pipe(
 					map(weatherOfCity =>
 						WeatherOfCityActions.loadWeatherOfCitySuccess(
-							{ weatherOfCity: { id: weatherOfCity.coordinate.name, ...weatherOfCity } }
-						)
+							{ weatherOfCity: { id: weatherOfCity.coordinate.name, ...weatherOfCity } },
+						),
 					),
 				),
 				onError: (action, error) => {
