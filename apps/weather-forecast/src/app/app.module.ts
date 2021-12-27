@@ -11,8 +11,8 @@ import { WeatherForecastServicesModule } from '@bp/weather-forecast/services';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-import * as fromWeatherOfCity from './+state/weather-of-city.reducer';
-import { WeatherOfCityEffects } from './+state/weather-of-city.effects';
+import * as fromWeatherOfCity from './state/weather-of-city.reducer';
+import { WeatherOfCityEffects } from './state/weather-of-city.effects';
 
 @NgModule({
 	declarations: [AppComponent],

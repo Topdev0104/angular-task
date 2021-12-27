@@ -28,7 +28,7 @@ const weatherOfCityReducer = createReducer(
 	on(WeatherOfCityActions.init, state => ({ ...state, loaded: false, error: null })),
 	on(WeatherOfCityActions.loadWeatherOfCitySuccess, (state, { weatherOfCity }) => {
 		console.log(state);
-		return weatherOfCityAdapter.setAll(weatherOfCity, { ...state, loaded: true })
+		return weatherOfCityAdapter.setAll([weatherOfCity], { ...state, loaded: true })
 	}),
 	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, error }))
 );

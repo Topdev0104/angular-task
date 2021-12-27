@@ -5,7 +5,7 @@ export const init = createAction('[WeatherOfCity Page] Init');
 
 export const loadWeatherOfCitySuccess = createAction(
 	'[WeatherOfCity/API] Load WeatherOfCity Success',
-	props<{ weatherOfCity: WeatherOfCityEntity[] }>()
+	props<{ weatherOfCity: WeatherOfCityEntity }>()
 );
 
 export const loadWeatherOfCityFailure = createAction(
