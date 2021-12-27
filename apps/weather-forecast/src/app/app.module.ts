@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 
 import * as fromWeatherOfCity from './state/weather-of-city.reducer';
 import { WeatherOfCityEffects } from './state/weather-of-city.effects';
+import * as fromWeatherOfCityDaily from './state/weather-of-city-daily.reducer';
+import * as fromWeatherOfCityHourly from './state/weather-of-city-hourly.reducer';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -37,6 +39,11 @@ import { WeatherOfCityEffects } from './state/weather-of-city.effects';
 		WeatherForecastServicesModule.forRoot(),
 		StoreModule.forFeature(fromWeatherOfCity.WEATHEROFCITY_FEATURE_KEY, fromWeatherOfCity.reducer),
 		EffectsModule.forFeature([WeatherOfCityEffects]),
+		StoreModule.forFeature(fromWeatherOfCityDaily.WEATHEROFCITYDAILY_FEATURE_KEY, fromWeatherOfCityDaily.reducer),
+		StoreModule.forFeature(
+			fromWeatherOfCityHourly.WEATHEROFCITYHOURLY_FEATURE_KEY,
+			fromWeatherOfCityHourly.reducer
+		),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

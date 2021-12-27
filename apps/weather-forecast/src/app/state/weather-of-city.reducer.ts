@@ -1,5 +1,5 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
 import * as WeatherOfCityActions from './weather-of-city.actions';
 import { WeatherOfCityEntity } from './weather-of-city.models';
@@ -25,11 +25,7 @@ export const initialState: State = weatherOfCityAdapter.getInitialState({
 
 const weatherOfCityReducer = createReducer(
 	initialState,
-	on(WeatherOfCityActions.init, state => ({ ...state, loaded: false, error: null })),
-	on(WeatherOfCityActions.loadWeatherOfCitySuccess, (state, { weatherOfCity }) => {
-		return weatherOfCityAdapter.upsertOne(weatherOfCity, { ...state, loaded: true});
-	}),
-	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, error }))
+	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, error })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

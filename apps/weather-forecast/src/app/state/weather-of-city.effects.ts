@@ -3,9 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { map } from 'rxjs';
 
-import { WeatherForecastApiService } from '@bp/weather-forecast/services';
+import { ForecastMode, WeatherForecastApiService } from '@bp/weather-forecast/services';
 
 import * as WeatherOfCityActions from './weather-of-city.actions';
+import * as WeatherOfCityDailyActions from './weather-of-city-daily.actions';
+import * as WeatherOfCityHourlyActions from './weather-of-city-hourly.actions';
 
 @Injectable()
 export class WeatherOfCityEffects {
@@ -15,11 +17,31 @@ export class WeatherOfCityEffects {
 			ofType(WeatherOfCityActions.loadWeatherOfCity),
 			fetch({
 				run: action => this.weatherForecastApiService.getWeatherForecastByCity(action.city, action.forecastMode).pipe(
-					map(weatherOfCity =>
-						WeatherOfCityActions.loadWeatherOfCitySuccess(
-							{ weatherOfCity: { id: weatherOfCity.coordinate.name, ...weatherOfCity } },
-						),
-					),
+					map(weatherOfCity => {
+						if (action.forecastMode === ForecastMode.Daily) {
+							return WeatherOfCityDailyActions.loadWeatherOfCityDailySuccess(
+								{
+									weatherOfCityDaily: {
+										id: weatherOfCity.coordinate.name,
+										weather: weatherOfCity.weather.daily,
+										coordinate: weatherOfCity.coordinate,
+									},
+								},
+							);
+						} else if (action.forecastMode === ForecastMode.Hourly) {
+							return WeatherOfCityHourlyActions.loadWeatherOfCityHourlySuccess(
+								{
+									weatherOfCityHourly: {
+										id: weatherOfCity.coordinate.name,
+										weather: weatherOfCity.weather.hourly,
+										coordinate: weatherOfCity.coordinate,
+									},
+								},
+							);
+						} else {
+							return WeatherOfCityActions.loadWeatherOfCityFailure({ error: 'No weather found' });
+						}
+					}),
 				),
 				onError: (action, error) => {
 					console.error('Error', error);

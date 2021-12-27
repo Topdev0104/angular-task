@@ -7,4 +7,16 @@
 	<button>Search</button>
 </form>
 
-{{ weatherOfCities$ | async | json }}
+<div *ngIf="form.value.forecastMode === ForecastMode.Daily">
+	<div *ngFor="let city of weatherForDaily$ | async">
+		<span>{{ city.id }}</span>:
+		<span>{{ city?.weather | json }}</span>
+	</div>
+</div>
+
+<div *ngIf="form.value.forecastMode === ForecastMode.Hourly">
+	<div *ngFor="let city of weatherForHourly$ | async">
+		<span>{{ city.id }}</span>:
+		<span>{{ city?.weather | json }}</span>
+	</div>
+</div>
