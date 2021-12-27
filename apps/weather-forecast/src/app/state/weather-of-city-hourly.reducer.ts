@@ -7,9 +7,7 @@ import { WeatherOfCityHourlyEntity } from './weather-of-city-hourly.models';
 export const WEATHEROFCITYHOURLY_FEATURE_KEY = 'weatherOfCityHourly';
 
 export interface State extends EntityState<WeatherOfCityHourlyEntity> {
-	selectedId?: string | number; // which WeatherOfCityHourly record has been selected
 	loaded: boolean; // has the WeatherOfCityHourly list been loaded
-	error?: string | null; // last known error (if any)
 }
 
 export interface WeatherOfCityHourlyPartialState {

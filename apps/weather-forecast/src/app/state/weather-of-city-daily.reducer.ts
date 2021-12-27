@@ -7,9 +7,7 @@ import { WeatherOfCityDailyEntity } from './weather-of-city-daily.models';
 export const WEATHEROFCITYDAILY_FEATURE_KEY = 'weatherOfCityDaily';
 
 export interface State extends EntityState<WeatherOfCityDailyEntity> {
-	selectedId?: string | number; // which WeatherOfCityDaily record has been selected
 	loaded: boolean; // has the WeatherOfCityDaily list been loaded
-	error?: string | null; // last known error (if any)
 }
 
 export interface WeatherOfCityDailyPartialState {
