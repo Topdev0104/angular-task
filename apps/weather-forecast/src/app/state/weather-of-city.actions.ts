@@ -7,6 +7,10 @@ export const loadWeatherOfCity = createAction(
 	props<{ city: string, forecastMode: ForecastMode }>(),
 );
 
+export const loadWeatherOfCitySuccess = createAction(
+	'[WeatherOfCity/API] Load WeatherOfCity Success',
+);
+
 export const loadWeatherOfCityFailure = createAction(
 	'[WeatherOfCity/API] Load WeatherOfCity Failure',
 	props<{ error: any }>(),

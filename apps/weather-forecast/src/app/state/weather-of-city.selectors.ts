@@ -6,7 +6,7 @@ export const getWeatherOfCityState = createFeatureSelector<State>(WEATHEROFCITY_
 
 const { selectAll, selectEntities } = weatherOfCityAdapter.getSelectors();
 
-export const getWeatherOfCityLoaded = createSelector(getWeatherOfCityState, (state: State) => state.loaded);
+export const getWeatherOfCityLoading = createSelector(getWeatherOfCityState, (state: State) => state.loading);
 
 export const getWeatherOfCityError = createSelector(getWeatherOfCityState, (state: State) => state.error);
 

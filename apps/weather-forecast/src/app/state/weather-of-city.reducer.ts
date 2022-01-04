@@ -8,7 +8,7 @@ export const WEATHEROFCITY_FEATURE_KEY = 'weatherOfCity';
 
 export interface State extends EntityState<WeatherOfCityEntity> {
 	selectedId?: string | number; // which WeatherOfCity record has been selected
-	loaded: boolean; // has the WeatherOfCity list been loaded
+	loading: boolean; // has the WeatherOfCity list been loaded
 	error?: string | null; // last known error (if any)
 }
 
@@ -20,12 +20,14 @@ export const weatherOfCityAdapter: EntityAdapter<WeatherOfCityEntity> = createEn
 
 export const initialState: State = weatherOfCityAdapter.getInitialState({
 	// set initial required properties
-	loaded: false,
+	loading: false,
 });
 
 const weatherOfCityReducer = createReducer(
 	initialState,
-	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, error })),
+	on(WeatherOfCityActions.loadWeatherOfCity, state => ({ ...state, loading: true })),
+	on(WeatherOfCityActions.loadWeatherOfCitySuccess, state => ({ ...state, loading: false })),
+	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, loading: false, error })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

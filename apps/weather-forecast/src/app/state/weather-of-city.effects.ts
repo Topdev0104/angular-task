@@ -8,6 +8,7 @@ import { ForecastMode, WeatherForecastApiService } from '@bp/weather-forecast/se
 import * as WeatherOfCityActions from './weather-of-city.actions';
 import * as WeatherOfCityDailyActions from './weather-of-city-daily.actions';
 import * as WeatherOfCityHourlyActions from './weather-of-city-hourly.actions';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class WeatherOfCityEffects {
@@ -18,6 +19,7 @@ export class WeatherOfCityEffects {
 			fetch({
 				run: action => this.weatherForecastApiService.getWeatherForecastByCity(action.city, action.forecastMode).pipe(
 					map(weatherOfCity => {
+						this.store.dispatch(WeatherOfCityActions.loadWeatherOfCitySuccess());
 						if (action.forecastMode === ForecastMode.Daily) {
 							return WeatherOfCityDailyActions.loadWeatherOfCityDailySuccess(
 								{
@@ -48,12 +50,14 @@ export class WeatherOfCityEffects {
 					return WeatherOfCityActions.loadWeatherOfCityFailure({ error });
 				},
 			}),
+			// map(() => WeatherOfCityActions.loadWeatherOfCitySuccess())
 		),
 	);
 
 	constructor(
 		private readonly actions$: Actions,
 		private readonly weatherForecastApiService: WeatherForecastApiService,
+		private readonly store: Store
 	) {
 	}
 }
