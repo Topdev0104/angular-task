@@ -33,6 +33,7 @@ export class WeatherForecastApiService {
 		const params = new HttpParams()
 			.append('lat', lat)
 			.append('lon', lon)
+			.append('units', 'metric') // Get Celsius temperature
 			.append('exclude', `current,minutely,${forecastMode === ForecastMode.Daily ? 'hourly' : 'daily'},alerts`)
 			.append('appid', this.apiKey);
 

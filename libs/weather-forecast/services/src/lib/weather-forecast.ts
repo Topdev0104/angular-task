@@ -45,10 +45,17 @@ export interface Weather {
 	wind_speed: number;
 }
 
+export interface Amount {
+	'1h': number;
+}
+
 export interface WeatherHourly extends Weather {
 	feels_like: number;
 	temp: number;
 	visibility: number;
+
+	rain?: Amount;
+	snow?: Amount;
 }
 
 export interface WeatherDaily extends Weather {
@@ -62,6 +69,9 @@ export interface WeatherDaily extends Weather {
 	sunset: number;
 
 	temp: TempOfDay;
+
+	rain?: number;
+	snow?: number;
 }
 
 export interface WeatherForecast {
