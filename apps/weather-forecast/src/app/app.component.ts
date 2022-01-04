@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ForecastMode } from '@bp/weather-forecast/services';
-
-import { loadWeatherOfCity } from './state/weather-of-city.actions';
 import { getWeatherOfCityError, getWeatherOfCityLoading } from './state/weather-of-city.selectors';
+import { loadWeatherOfCity } from './state/weather-of-city.actions';
 
 @Component({
 	selector: 'bp-root',
@@ -30,14 +30,20 @@ export class AppComponent implements OnInit, OnDestroy {
 	constructor(
 		private readonly store: Store,
 		private fb: FormBuilder,
+		private router: Router,
+		private route: ActivatedRoute,
 	) {
 	}
 
 	ngOnInit(): void {
-		this.form.get('forecastMode')?.valueChanges.pipe(
+		this.route.queryParams.pipe(
 			takeUntil(this.unsubscribeAll),
-		).subscribe(() => {
-			console.log('something');
+		).subscribe(params => {
+			this.form.get('city')?.setValue(params.city);
+			this.form.get('forecastMode')?.setValue(params.forecastMode || ForecastMode.Daily);
+			if (this.form.valid) {
+				this.store.dispatch(loadWeatherOfCity(this.form.value));
+			}
 		});
 	}
 
@@ -50,7 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
 		if (this.form.invalid) {
 			alert('Please enter city name.');
 		} else {
-			this.store.dispatch(loadWeatherOfCity(this.form.value));
+			const { city, forecastMode } = this.form.value;
+			this.router.navigate([], { queryParams: { city, forecastMode } });
 		}
 	}
 }

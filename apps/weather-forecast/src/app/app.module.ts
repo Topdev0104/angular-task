@@ -17,6 +17,7 @@ import { WeatherOfCityEffects } from './state/weather-of-city.effects';
 import * as fromWeatherOfCityDaily from './state/weather-of-city-daily.reducer';
 import * as fromWeatherOfCityHourly from './state/weather-of-city-hourly.reducer';
 
+import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
+		AppRoutingModule,
 		StoreModule.forRoot(
 			{},
 			{
