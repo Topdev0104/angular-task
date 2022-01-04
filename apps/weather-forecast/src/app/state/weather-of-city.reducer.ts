@@ -25,8 +25,8 @@ export const initialState: State = weatherOfCityAdapter.getInitialState({
 
 const weatherOfCityReducer = createReducer(
 	initialState,
-	on(WeatherOfCityActions.loadWeatherOfCity, state => ({ ...state, loading: true })),
-	on(WeatherOfCityActions.loadWeatherOfCitySuccess, state => ({ ...state, loading: false })),
+	on(WeatherOfCityActions.loadWeatherOfCity, state => ({ ...state, loading: true, error: null })),
+	on(WeatherOfCityActions.loadWeatherOfCitySuccess, state => ({ ...state, loading: false, error: null })),
 	on(WeatherOfCityActions.loadWeatherOfCityFailure, (state, { error }) => ({ ...state, loading: false, error })),
 );
 
