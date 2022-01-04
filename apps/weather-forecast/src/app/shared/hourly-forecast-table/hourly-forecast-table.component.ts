@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { getAllWeatherOfCityHourly } from '../../state/weather-of-city-hourly.selectors';
@@ -8,7 +8,7 @@ import { getAllWeatherOfCityHourly } from '../../state/weather-of-city-hourly.se
 	templateUrl: './hourly-forecast-table.component.html',
 	styleUrls: ['./hourly-forecast-table.component.scss'],
 })
-export class HourlyForecastTableComponent implements OnInit {
+export class HourlyForecastTableComponent {
 
 	weatherForHourly$ = this.store.select(getAllWeatherOfCityHourly);
 
@@ -17,6 +17,4 @@ export class HourlyForecastTableComponent implements OnInit {
 	) {
 	}
 
-	ngOnInit() {
-	}
 }

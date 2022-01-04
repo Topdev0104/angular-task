@@ -1,3 +1,7 @@
+<div *ngIf="!(weatherForHourly$ | async)?.length">
+	<p class="text-sky-900 font-18">No hourly weather forecast data yet.</p>
+</div>
+
 <div *ngFor="let city of weatherForHourly$ | async">
 	<span>{{ city.id }}</span>:
 

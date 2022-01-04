@@ -1,9 +1,8 @@
-<div class="flex flex-wrap items-center">
-	<button class="btn mr-15" *ngFor="let city of weatherForDaily$ | async">{{ city.id }}</button>
+<div *ngIf="!(weatherForDaily$ | async)?.length">
+	<p class="text-sky-900 font-18">No daily weather forecast data yet.</p>
 </div>
-
 <div *ngFor="let city of weatherForDaily$ | async">
-	<span>{{ city.id }}</span>
+	<h3 class="text-20 font-bold my-15">{{ city.id }}</h3>
 
 	<table class="border-separate border border-gray-400">
 		<thead>
