@@ -1,0 +1,46 @@
+<div *ngFor="let city of weatherForHourly$ | async">
+	<span>{{ city.id }}</span>:
+
+	<table class="border-separate border border-gray-400">
+		<thead>
+		<tr class="bg-sky-900 text-white">
+			<th class="border border-gray-300">Time</th>
+			<th class="border border-gray-300"></th>
+			<th class="border border-gray-300">Weather</th>
+			<th class="border border-gray-300">Temp</th>
+			<th class="border border-gray-300">Feel</th>
+			<th class="border border-gray-300">Pressure</th>
+			<th class="border border-gray-300">Humidity</th>
+			<th class="border border-gray-300">Atmo Temp</th>
+			<th class="border border-gray-300">Clouds</th>
+			<th class="border border-gray-300">Visibility</th>
+			<th class="border border-gray-300">Wind Speed</th>
+			<th class="border border-gray-300">Wind Gust</th>
+			<th class="border border-gray-300">UV</th>
+			<th class="border border-gray-300">Rain</th>
+			<th class="border border-gray-300">Snow</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="bg-sky-200" *ngFor="let item of city.weather">
+			<td class="border border-gray-300">{{ item.dt * 1000 | date : 'short' }}</td>
+			<td class="border border-gray-300 flex flex-col items-center">
+				<span><img width="30" height="30" src="http://openweathermap.org/img/wn/{{ item.weather[0].icon }}.png" alt="Weather icon"></span>
+			</td>
+			<td class="border border-gray-300">{{ item.weather[0].description }}</td>
+			<td class="border border-gray-300">{{ item.temp }}°C</td>
+			<td class="border border-gray-300">{{ item.feels_like }}°C</td>
+			<td class="border border-gray-300">{{ item.pressure }}hPa</td>
+			<td class="border border-gray-300">{{ item.humidity }}%</td>
+			<td class="border border-gray-300">{{ item.dew_point }}°C</td>
+			<td class="border border-gray-300">{{ item.clouds }}%</td>
+			<td class="border border-gray-300">{{ item.visibility }}m</td>
+			<td class="border border-gray-300">{{ item.wind_speed }}m/s</td>
+			<td class="border border-gray-300">{{ item.wind_gust }}m/s</td>
+			<td class="border border-gray-300">{{ item.uvi }}</td>
+			<td class="border border-gray-300">{{ item.rain ? item.rain['1h'] + 'mm/h' : 'N/A' }}</td>
+			<td class="border border-gray-300">{{ item.snow ? item.snow['1h'] + 'mm/h' : 'N/A' }}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
