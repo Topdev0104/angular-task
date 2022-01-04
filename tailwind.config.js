@@ -1,4 +1,5 @@
 const { guessProductionMode } = require("@ngneat/tailwind");
+const colors = require('tailwindcss/colors')
 
 function range(start, end, increment = 1) {
 	const count = Math.floor((end - start + increment) / increment);
@@ -25,26 +26,24 @@ module.exports = {
 	},
 	darkMode: false,
 	theme: {
-		screens: {
-			'xs': '480px',
-			'sm': '640px',
-			'md': '768px',
-			'lg': '1024px',
-			'xl': '1280px',
-			'2xl': '1536px',
+		colors: {
+			transparent: 'transparent',
+			current: 'currentColor',
+			black: colors.black,
+			white: colors.white,
+			gray: colors.gray,
+			sky: colors.sky,
+			emerald: colors.emerald,
+			indigo: colors.indigo,
+			yellow: colors.yellow,
 		},
 		container: {
-			screens: {
-				xs: '100%',
-				sm: '480px',
-				lg: '480px',
-			},
 			center: true,
 			padding: {
-				DEFAULT: '0',
-				sm: '0',
-				lg: '0',
-				xl: '0',
+				DEFAULT: '1rem',
+				sm: '2rem',
+				lg: '4rem',
+				xl: '6rem',
 			},
 		},
 		fontSize: {
