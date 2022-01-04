@@ -2,6 +2,26 @@
 	<p class="text-sky-900 font-18">No hourly weather forecast data yet.</p>
 </div>
 
+<div *ngIf="(weatherForHourly$ | async) as weatherForHourly">
+
+	<h3 class="text-20 font-bold my-15">Temperature</h3>
+
+	<table class="border-separate border border-gray-400" *ngIf="weatherForHourly && weatherForHourly.length">
+		<thead>
+		<tr class="bg-sky-900 text-white">
+			<th class="border border-gray-300">City Name</th>
+			<th class="border border-gray-300" *ngFor="let day of weatherForHourly[0].weather">{{ day.dt * 1000 | date : 'h:mm a' }}</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="bg-sky-200" *ngFor="let city of weatherForHourly">
+			<td class="border border-gray-300">{{ city.id }}</td>
+			<td class="border border-gray-300" *ngFor="let item of city.weather">{{ item.temp }}°C</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
 <div *ngFor="let city of weatherForHourly$ | async">
 	<h3 class="text-20 font-bold my-15">{{ city.id }}</h3>
 

@@ -25,7 +25,8 @@ export class WeatherOfCityEffects {
 								{
 									weatherOfCityDaily: {
 										id: weatherOfCity.coordinate.name,
-										weather: weatherOfCity.weather.daily,
+										// do not select first item because it is current time
+										weather: weatherOfCity.weather.daily?.slice(1, 8),
 										coordinate: weatherOfCity.coordinate,
 									},
 								},
@@ -35,7 +36,8 @@ export class WeatherOfCityEffects {
 								{
 									weatherOfCityHourly: {
 										id: weatherOfCity.coordinate.name,
-										weather: weatherOfCity.weather.hourly,
+										// do not select first item because it is current time
+										weather: weatherOfCity.weather.hourly?.filter((item, index) => index % 3 === 0).slice(1, 9),
 										coordinate: weatherOfCity.coordinate,
 									},
 								},

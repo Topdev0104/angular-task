@@ -1,6 +1,36 @@
 <div *ngIf="!(weatherForDaily$ | async)?.length">
 	<p class="text-sky-900 font-18">No daily weather forecast data yet.</p>
 </div>
+
+<div *ngIf="(weatherForDaily$ | async) as weatherForDaily">
+
+	<h3 class="text-20 font-bold my-15">Temperature</h3>
+
+	<table class="border-separate border border-gray-400" *ngIf="weatherForDaily && weatherForDaily.length">
+		<thead>
+		<tr class="bg-sky-900 text-white">
+			<th class="border border-gray-300">City Name</th>
+			<th class="border border-gray-300" *ngFor="let day of weatherForDaily[0].weather">{{ day.dt * 1000 | date : 'M/d' }}</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="bg-sky-200" *ngFor="let city of weatherForDaily">
+			<td class="border border-gray-300">{{ city.id }}</td>
+			<td class="border border-gray-300" *ngFor="let item of city.weather">
+				<div>
+					<p><span>Morning: </span><span>{{ item.temp.morn }}°C</span></p>
+					<p><span>Day: </span><span>{{ item.temp.day }}°C</span></p>
+					<p><span>Evening: </span><span>{{ item.temp.eve }}°C</span></p>
+					<p><span>Night: </span><span>{{ item.temp.night }}°C</span></p>
+					<p><span>Min: </span><span>{{ item.temp.min }}°C</span></p>
+					<p><span>Max: </span><span>{{ item.temp.max }}°C</span></p>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
 <div *ngFor="let city of weatherForDaily$ | async">
 	<h3 class="text-20 font-bold my-15">{{ city.id }}</h3>
 
@@ -28,8 +58,8 @@
 		<tbody>
 		<tr class="bg-sky-200" *ngFor="let item of city.weather">
 			<td class="border border-gray-300">{{ item.dt * 1000 | date : 'shortDate' }}</td>
-			<td class="border border-gray-300 flex items-center justify-center">
-				<span><img width="30" height="30" src="http://openweathermap.org/img/wn/{{ item.weather[0].icon }}.png" alt="Weather icon"></span>
+			<td class="border border-gray-300">
+				<div><img width="30" height="30" src="http://openweathermap.org/img/wn/{{ item.weather[0].icon }}.png" alt="Weather icon"></div>
 			</td>
 			<td class="border border-gray-300">{{ item.weather[0].description }}</td>
 			<td class="border border-gray-300">
