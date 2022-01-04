@@ -1,22 +1,32 @@
-<form [formGroup]="form" (ngSubmit)="search()">
-	<input formControlName="city">
-	<select formControlName="forecastMode">
-		<option [value]="ForecastMode.Daily">Daily</option>
-		<option [value]="ForecastMode.Hourly">Hourly</option>
-	</select>
-	<button>Search</button>
-</form>
+<bp-layout>
+	<bp-today-clock></bp-today-clock>
+	<form class="flex items-center" [formGroup]="form" (ngSubmit)="search()">
+		<div class="form-group">
+			<input type="text" placeholder="Please enter city name" class="form-input" formControlName="city">
+		</div>
+		<div class="form-group">
+			<select class="form-input" formControlName="forecastMode">
+				<option [value]="ForecastMode.Daily">Daily</option>
+				<option [value]="ForecastMode.Hourly">Hourly</option>
+			</select>
+		</div>
 
-<div *ngIf="form.value.forecastMode === ForecastMode.Daily">
-	<div *ngFor="let city of weatherForDaily$ | async">
-		<span>{{ city.id }}</span>:
-		<span>{{ city?.weather | json }}</span>
-	</div>
-</div>
+		<button class="btn">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+			</svg>
+			<span class="ml-15">Search</span>
+		</button>
+	</form>
 
-<div *ngIf="form.value.forecastMode === ForecastMode.Hourly">
-	<div *ngFor="let city of weatherForHourly$ | async">
-		<span>{{ city.id }}</span>:
-		<span>{{ city?.weather | json }}</span>
+	<div class="mt-30 overflow-hidden flex items-center justify-center mb-30">
+
+		<div class="text-sky-900 font-18" *ngIf="loading$ | async; else table">Loading weather forecast data...</div>
+
+		<ng-template #table>
+			<bp-daily-forecast-table *ngIf="form.value.forecastMode === ForecastMode.Daily"></bp-daily-forecast-table>
+			<bp-hourly-forecast-table *ngIf="form.value.forecastMode === ForecastMode.Hourly"></bp-hourly-forecast-table>
+		</ng-template>
 	</div>
-</div>
+
+</bp-layout>

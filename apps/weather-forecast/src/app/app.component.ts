@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ForecastMode } from '@bp/weather-forecast/services';
 
 import { loadWeatherOfCity } from './state/weather-of-city.actions';
-import { getAllWeatherOfCity } from './state/weather-of-city.selectors';
-import { getAllWeatherOfCityDaily } from './state/weather-of-city-daily.selectors';
-import { getAllWeatherOfCityHourly } from './state/weather-of-city-hourly.selectors';
+import { getWeatherOfCityLoading } from './state/weather-of-city.selectors';
 
 @Component({
 	selector: 'bp-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
 	ForecastMode = ForecastMode;
 
@@ -23,9 +22,9 @@ export class AppComponent implements OnInit {
 		forecastMode: [ForecastMode.Daily, Validators.required],
 	});
 
-	weatherOfCity$ = this.store.select(getAllWeatherOfCity);
-	weatherForDaily$ = this.store.select(getAllWeatherOfCityDaily);
-	weatherForHourly$ = this.store.select(getAllWeatherOfCityHourly);
+	loading$ = this.store.select(getWeatherOfCityLoading);
+
+	private unsubscribeAll: Subject<null> = new Subject<null>();
 
 	constructor(
 		private readonly store: Store,
@@ -34,10 +33,23 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('init');
+		this.form.get('forecastMode')?.valueChanges.pipe(
+			takeUntil(this.unsubscribeAll),
+		).subscribe(() => {
+			console.log('something');
+		});
+	}
+
+	ngOnDestroy() {
+		this.unsubscribeAll.next(null);
+		this.unsubscribeAll.complete();
 	}
 
 	search() {
-		this.store.dispatch(loadWeatherOfCity(this.form.value));
+		if (this.form.invalid) {
+			alert('Please enter city name.');
+		} else {
+			this.store.dispatch(loadWeatherOfCity(this.form.value));
+		}
 	}
 }
