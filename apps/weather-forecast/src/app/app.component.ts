@@ -6,7 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ForecastMode } from '@bp/weather-forecast/services';
 
 import { loadWeatherOfCity } from './state/weather-of-city.actions';
-import { getWeatherOfCityLoading } from './state/weather-of-city.selectors';
+import { getWeatherOfCityError, getWeatherOfCityLoading } from './state/weather-of-city.selectors';
 
 @Component({
 	selector: 'bp-root',
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	});
 
 	loading$ = this.store.select(getWeatherOfCityLoading);
+	error$ = this.store.select(getWeatherOfCityError);
 
 	private unsubscribeAll: Subject<null> = new Subject<null>();
 

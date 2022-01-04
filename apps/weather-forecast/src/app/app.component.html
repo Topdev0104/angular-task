@@ -21,7 +21,10 @@
 
 	<div class="mt-30 overflow-hidden flex items-center justify-center mb-30">
 
-		<div class="text-sky-900 font-18" *ngIf="loading$ | async; else table">Loading weather forecast data...</div>
+		<div class="text-center">
+			<div class="text-sky-900 font-18" *ngIf="loading$ | async; else table">Loading weather forecast data...</div>
+			<div class="text-rose-600 font-18" *ngIf="error$ | async">Something went wrong while fetching the data.</div>
+		</div>
 
 		<ng-template #table>
 			<bp-daily-forecast-table *ngIf="form.value.forecastMode === ForecastMode.Daily"></bp-daily-forecast-table>

@@ -33,9 +33,7 @@ module.exports = {
 			white: colors.white,
 			gray: colors.gray,
 			sky: colors.sky,
-			emerald: colors.emerald,
-			indigo: colors.indigo,
-			yellow: colors.yellow,
+			rose: colors.rose,
 		},
 		container: {
 			center: true,
