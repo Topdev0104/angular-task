@@ -1,142 +1,115 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "none",
-      "e2eTestRunner": "none"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "none"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
-    }
-  },
-  "projects": {
-    "weather-forecast": {
-      "projectType": "application",
-      "root": "",
-      "sourceRoot": "apps/weather-forecast/src",
-      "prefix": "bp",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/weather-forecast",
-            "index": "apps/weather-forecast/src/index.html",
-            "main": "apps/weather-forecast/src/main.ts",
-            "polyfills": "apps/weather-forecast/src/polyfills.ts",
-            "tsConfig": "apps/weather-forecast/tsconfig.app.json",
-            "aot": true,
-            "assets": ["apps/weather-forecast/src/favicon.ico", "apps/weather-forecast/src/assets"],
-            "styles": ["apps/weather-forecast/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/weather-forecast/src/environments/environment.ts",
-                  "with": "apps/weather-forecast/src/environments/environment.production.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "weather-forecast:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "weather-forecast:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "weather-forecast:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/weather-forecast/src/**/*.ts", "apps/weather-forecast/src/**/*.html"]
-          }
-        }
-      },
-      "tags": []
-    },
-    "weather-forecast-services": {
-      "projectType": "library",
-      "root": "libs/weather-forecast/services",
-      "sourceRoot": "libs/weather-forecast/services/src",
-      "prefix": "bp",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/weather-forecast/services"],
-          "options": {
-            "project": "libs/weather-forecast/services/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/weather-forecast/services/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "libs/weather-forecast/services/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/weather-forecast/services/src/**/*.ts",
-              "libs/weather-forecast/services/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    }
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"projects": {
+		"weather-forecast": {
+			"projectType": "application",
+			"root": "",
+			"sourceRoot": "apps/weather-forecast/src",
+			"prefix": "bp",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"outputPath": "dist/apps/weather-forecast",
+						"index": "apps/weather-forecast/src/index.html",
+						"main": "apps/weather-forecast/src/main.ts",
+						"polyfills": "apps/weather-forecast/src/polyfills.ts",
+						"tsConfig": "apps/weather-forecast/tsconfig.app.json",
+						"aot": true,
+						"assets": ["apps/weather-forecast/src/favicon.ico", "apps/weather-forecast/src/assets"],
+						"styles": ["apps/weather-forecast/src/styles.scss"],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "apps/weather-forecast/src/environments/environment.ts",
+									"with": "apps/weather-forecast/src/environments/environment.production.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "weather-forecast:build"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "weather-forecast:build:production"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "weather-forecast:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/weather-forecast/src/**/*.ts", "apps/weather-forecast/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"weather-forecast-services": {
+			"projectType": "library",
+			"root": "libs/weather-forecast/services",
+			"sourceRoot": "libs/weather-forecast/services/src",
+			"prefix": "bp",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/weather-forecast/services"],
+					"options": {
+						"project": "libs/weather-forecast/services/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/weather-forecast/services/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/weather-forecast/services/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"libs/weather-forecast/services/src/**/*.ts",
+							"libs/weather-forecast/services/src/**/*.html"
+						]
+					}
+				}
+			},
+			"tags": []
+		}
+	}
 }

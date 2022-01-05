@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+	font-family: 'Poppins', sans-serif;
+}
+
+.btn {
+	@apply font-medium h-50 shadow-md bg-sky-600 text-white px-20 flex items-center
+}
+
+.form-group {
+	.form-input {
+		@apply px-10 h-50 min-w-100
+	}
+}
